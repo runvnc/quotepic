@@ -48,12 +48,14 @@ app.post('/interactions', async function (req, res) {
     const { name } = data;
 
     if (name === 'aquote') {
-      let imgdat = await generateImage('O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U')
+      const ADDR = 'O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U'
+
+      let imgdat = await generateImage(ADDR)
+      const {filename} = imgdat
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          // Fetches a random emoji to send from a helper function
-          content: '`'+JSON.stringify(imgdat,null,4)+'`',
+          content: `http://algonfts.art/${ADDR}/1/${filename}`,
         },
       });
     }

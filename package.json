@@ -11,6 +11,7 @@
   "author": "Shay DeWael",
   "license": "MIT",
   "dependencies": {
+    "check-disk-space": "^3.3.0",
     "delay": "^5.0.0",
     "discord-interactions": "^3.2.0",
     "dotenv": "^16.0.0",
