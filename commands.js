@@ -72,9 +72,9 @@ function createCommandChoices() {
 }
 
 // Simple test command
-export const TEST_COMMAND = {
-  name: 'test',
-  description: 'Basic guild command',
+export const QUOTE_COMMAND = {
+  name: 'aquote',
+  description: 'Random quote on random image, from algonfts.art',
   type: 1,
 };
 

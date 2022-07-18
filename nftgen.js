@@ -1,4 +1,5 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
+import delay from 'delay'
 
 const base = 'https://algonfts.art'
 
