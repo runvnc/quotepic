@@ -20,7 +20,7 @@ const MB = 1024 * KB
 const GB = 1024 * MB
 
 export async function generateImage(addr) {
-  let space = await checkDiskSpace()
+  let space = await checkDiskSpace('/')
   console.log({space})
   if (space < 50*GB) throw new Error('Low disk space, cannot generate.')
 
