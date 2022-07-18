@@ -13,6 +13,7 @@ import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
   HasGuildCommands,
+  InstallGlobalCommand
 } from './commands.js';
 
 // Create an express app
@@ -31,7 +32,7 @@ const activeGames = {};
 app.post('/interactions', async function (req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
-
+  console.log({type, id, data})
   /**
    * Handle verification requests
    */
@@ -177,10 +178,5 @@ app.post('/interactions', async function (req, res) {
 
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);
-
-  // Check if guild commands from commands.json are installed (if not, install them)
-  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
-    TEST_COMMAND,
-    CHALLENGE_COMMAND,
-  ]);
+  InstallGlobalCommand(process.env.APP_ID, QUOTE_COMMAND)
 });
