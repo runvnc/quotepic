@@ -44,8 +44,10 @@ app.post('/interactions', async function (req, res) {
 
     if (name === 'aquote') {
       const ADDR = 'O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U'
-
-      generateImage(ADDR, data.options[0].value).then( (imgdat) => {
+      let author
+      if (data.options && data.options.length>0)
+        author = data.options[0].vale
+      generateImage(ADDR, author).then( (imgdat) => {
         const {filename} = imgdat
          editMessage(token, `http://algonfts.art/${ADDR}/1/${filename}`)
       })
