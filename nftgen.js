@@ -25,16 +25,20 @@ export async function generateImage(addr) {
   if (space < 50*GB) throw new Error('Low disk space, cannot generate.')
 
   const url = `${base}/ngen2/${addr}?count=1`
+  console.log('calling fetch 1')
   let res = await fetchjson(`${base}/ngen2/${addr}?count=1`)
+  console.log('result')
   let tries = 0
   while (tries < 100) {
     let res2 = await fetchjson(`${base}/messages/${addr}`)
+    console.log('.')
     if (res2 && res2.length>0) {
+      console.log({res2})
       let parsed = JSON.parse(res2[0].substr(6))
       return parsed
     }
     tries++
-    await delay(330)
+    await delay(100)
   }
   return {error: 'Could not generate'}
 }
