@@ -43,4 +43,3 @@ export async function generateImage(addr) {
   return {error: 'Could not generate'}
 }
 
-await generateImage('O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U')

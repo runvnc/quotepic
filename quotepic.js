@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import {getClient} from './lib.js'
+import {getClient, editMessage} from './lib.js'
 import express from 'express';
 import {
   InteractionType,
@@ -32,20 +32,12 @@ const activeGames = {};
  */
 app.post('/interactions', async function (req, res) {
   // Interaction type and data
-  const { type, id, data, channel_id } = req.body;
+  const { type, id, data, channel_id, token } = req.body;
   console.log(req.body)
-//  console.log({type, id, data})
-  /**
-   * Handle verification requests
-   */
   if (type === InteractionType.PING) {
     return res.send({ type: InteractionResponseType.PONG });
   }
 
-  /**
-   * Handle slash command requests
-   * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
-   */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
    
@@ -53,17 +45,15 @@ app.post('/interactions', async function (req, res) {
       const ADDR = 'O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U'
 
       generateImage(ADDR).then( (imgdat) => {
-        , channel_id, id)
-          const {filename} = imgdat
-          console.log('sending result')
-          content: `http://algonfts.art/${ADDR}/1/${filename}`
+        const {filename} = imgdat
+         editMessage(token, `http://algonfts.art/${ADDR}/1/${filename}`)
       })
         
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: `Generating..`,
-        },
+        }
       });
     }
     // "challenge" guild command
