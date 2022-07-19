@@ -19,14 +19,20 @@ const KB = 1024
 const MB = 1024 * KB
 const GB = 1024 * MB
 
-export async function generateImage(addr) {
+export async function generateImage(addr, author) {
   let space = await checkDiskSpace('/')
   console.log({space})
   if (space < 50*GB) throw new Error('Low disk space, cannot generate.')
 
-  const url = `${base}/ngen2/${addr}?count=1`
+  let url = `${base}/ngen2/${addr}?count=1`
+  if (author) {
+    const authorjson = JSON.stringify({author})
+    let params = {count:1, forceVariants: authorjson}
+    let query = new URLSearchParams(params).toString()
+    url = `${base}/ngencustom/${addr}?${query}`
+  }
   console.log('calling fetch 1')
-  let res = await fetchjson(`${base}/ngen2/${addr}?count=1`)
+  let res = await fetchjson(url)
   console.log('result')
   let tries = 0
   while (tries < 100) {

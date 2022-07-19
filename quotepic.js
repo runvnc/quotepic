@@ -34,17 +34,18 @@ app.post('/interactions', async function (req, res) {
   // Interaction type and data
   const { type, id, data, channel_id, token } = req.body;
   console.log(req.body)
+  console.log(data.options)
   if (type === InteractionType.PING) {
     return res.send({ type: InteractionResponseType.PONG });
   }
 
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
-   
+
     if (name === 'aquote') {
       const ADDR = 'O3PLKXUNEXXLLZXTX6A3GRQK46IV3DDUNJ7VOWXEBCL3CBHPCTNTAQHJ2U'
 
-      generateImage(ADDR).then( (imgdat) => {
+      generateImage(ADDR, data.options[0].value).then( (imgdat) => {
         const {filename} = imgdat
          editMessage(token, `http://algonfts.art/${ADDR}/1/${filename}`)
       })

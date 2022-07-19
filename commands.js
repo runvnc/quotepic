@@ -76,6 +76,13 @@ export const QUOTE_COMMAND = {
   name: 'aquote',
   description: 'Random quote on random image, from algonfts.art',
   type: 1,
+  options: [
+   {
+    type: 3,
+    name: 'search',
+    description: 'Specify author, search terms, or blank',
+    required: false }
+  ]
 };
 
 // Command containing options
